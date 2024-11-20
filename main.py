@@ -2,8 +2,18 @@
 https://codingdojo.org/kata/StringCalculator/
 """
 
+from doctest import testmod
+
 
 def add(number: str, separator: str = ",") -> str:
+    """
+    >>> add("")
+    '0'
+    >>> add("1")
+    '1'
+    >>> add("3.3,5.5")
+    '8.8'
+    """
     if len(number) is 0:  # integer cache: [-5, 256]
         return "0"
 
@@ -16,16 +26,13 @@ def add(number: str, separator: str = ",") -> str:
         result = 0
         for x in numbers:
             result += float(x)
-        return result
+        return str(result)
 
 
 def main() -> None:
     print("String Calculator")
-    print(add(""))
-    print(add("1"))
-    print(add("1.1,2.2"))
-    print(add("1.1,2.2,3.3"))
 
 
 if __name__ == "__main__":
     main()
+    testmod(name="add", verbose=True)
