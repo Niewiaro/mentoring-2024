@@ -4,6 +4,7 @@ https://codingdojo.org/kata/StringCalculator/
 
 from doctest import testmod
 import re
+import timeit
 
 
 def add(number: str, re_separator: str = ",|\n") -> str:
@@ -33,16 +34,26 @@ def add(number: str, re_separator: str = ",|\n") -> str:
     if len(numbers) is 1:
         return numbers[0]
     else:  # Will function be faster without else?
-        # numbers = [float(x) for x in numbers]
-
         result = 0
         for x in numbers:
             result += float(x)
         return str(result)
 
 
+def add_test():
+    SETUP_CODE = """from __main__ import add"""
+
+    TEST_CODE = """add("3.3,5.5")"""
+
+    # timeit.repeat statement
+    print(
+        "The time taken with 'else' is:\t",
+        timeit.timeit(setup=SETUP_CODE, stmt=TEST_CODE),
+    )
+
+
 def main() -> None:
-    print("String Calculator")
+    add_test()
 
 
 if __name__ == "__main__":
