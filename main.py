@@ -3,9 +3,10 @@ https://codingdojo.org/kata/StringCalculator/
 """
 
 from doctest import testmod
+import re
 
 
-def add(number: str, separator: str = ",") -> str:
+def add(number: str, re_separator: str = ",|\n") -> str:
     """
     >>> add("")
     '0'
@@ -13,11 +14,22 @@ def add(number: str, separator: str = ",") -> str:
     '1'
     >>> add("3.3,5.5")
     '8.8'
+    >>> add("3.3,5.5,3")
+    '11.8'
+    >>> add("3.3,5.5,3,")
+    'Number expected but EOF found.'
     """
+    # >>> add("3.3\n5.5,3")
+    # '11.8'
+
     if len(number) is 0:  # integer cache: [-5, 256]
         return "0"
 
-    numbers = number.split(separator)
+    if not re.search(r"\d$", number):
+        return "Number expected but EOF found."
+
+    # numbers = number.split(separator)
+    numbers = re.split(re_separator, number)
     if len(numbers) is 1:
         return numbers[0]
     else:  # Will function be faster without else?
