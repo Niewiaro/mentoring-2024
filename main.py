@@ -15,18 +15,19 @@ def add(number: str, re_separator: str = ",|\n") -> str:
     '1'
     >>> add("3.3,5.5")
     '8.8'
+    >>> add("1\\n2")
+    '3'
     >>> add("3.3,5.5,3")
     '11.8'
     >>> add("3.3,5.5,3,")
-    'Number expected but EOF found.'
-    >>> add("3.3\\n5.5,3")
-    '11.8'
+    Traceback (most recent call last):
+    ValueError: Number expected but EOF found.
     """
     if len(number) is 0:  # integer cache: [-5, 256]
         return "0"
 
     if not re.search(r"\d$", number):
-        return "Number expected but EOF found."
+        raise ValueError("Number expected but EOF found.")
 
     numbers = re.split(re_separator, number)
     if len(numbers) is 1:
@@ -59,5 +60,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    # main()
     testmod(name="add", verbose=True)
