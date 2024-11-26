@@ -33,13 +33,7 @@ def add(number: str, re_separator: str = ",|\n") -> str:
         raise ValueError("Number expected but EOF found.")
 
     numbers = re.split(re_separator, number)
-    if len(numbers) is 1:
-        return numbers[0]
-
-    result = 0
-    for x in numbers:
-        if x:
-            result += float(x)
+    result = sum(float(x) for x in numbers if x)
 
     if result.is_integer():
         return str(int(result))
