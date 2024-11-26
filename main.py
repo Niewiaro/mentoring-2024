@@ -23,6 +23,9 @@ def add(number: str, re_separator: str = ",|\n") -> str:
     Traceback (most recent call last):
     ValueError: Number expected but EOF found.
     """
+    if type(number) is not str:
+        raise TypeError("Input must be a string")
+
     if len(number) is 0:  # integer cache: [-5, 256]
         return "0"
 
