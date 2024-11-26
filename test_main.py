@@ -23,7 +23,7 @@ class TestAdd(unittest.TestCase):
         self.assertEqual(add("1,2\n3"), "6")
 
     def test_trailing_separator(self):
-        self.assertEqual(add("1,2,"), "Number expected but EOF found.")
+        self.assertRaises(ValueError, add, "1,2,3,")
 
     def test_float_and_int(self):
         self.assertAlmostEqual(float(add("3.3,5.5,3")), 11.8)
