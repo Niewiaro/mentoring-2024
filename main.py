@@ -36,6 +36,9 @@ def add(number: str, re_separator: str = ",|\n") -> str:
     for x in numbers:
         if x:
             result += float(x)
+
+    if result.is_integer():
+        return str(int(result))
     return str(result)
 
 
